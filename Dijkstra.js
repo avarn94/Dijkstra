@@ -1,4 +1,4 @@
-var Dijkstra = function(distances, firstnode, showRoot) {
+var Dijkstra = function(distances, firstNode, showRoot) {
 	
 
 	/*---------------------------Constructor call validation----------------------------*/
@@ -11,14 +11,14 @@ var Dijkstra = function(distances, firstnode, showRoot) {
 		console.log("The first parameter must be an Array!");
 		return -1;
 	}
-	if (isNaN(firstnode)) {
+	if (isNaN(firstNode)) {
 		console.log("node's number must be a number!");
 		return -1;
 	}
 
 	var arrayLength = distances.length;
 
-	if (firstnode < 0 || firstnode >= arrayLength) {
+	if (firstNode < 0 || firstNode >= arrayLength) {
 		console.log("The number of first node shouldn't exceed the number of all nodes!");
 		return -1;
 	}
@@ -42,9 +42,9 @@ var Dijkstra = function(distances, firstnode, showRoot) {
 		optimizedDistances[i] = Number.POSITIVE_INFINITY;
 		this.usedNode[i] = 0; //0 - not visited, 1 - visited node
 	}
-	this.usedNode[firstnode] = 1;
-	optimizedDistances[firstnode] = 0;
-	var currentNode = firstnode; //set the current node
+	this.usedNode[firstNode] = 1;
+	optimizedDistances[firstNode] = 0;
+	var currentNode = firstNode; //set the current node
 
 	var step = 0;
 
