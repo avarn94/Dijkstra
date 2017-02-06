@@ -79,7 +79,7 @@ var Dijkstra = function(distances, firstNode, showRoot) {
 					if (optimizedDistances[i] > optimizedDistances[currentNode] + distances[currentNode][i]) {
 						optimizedDistances[i] = optimizedDistances[currentNode] + distances[currentNode][i];
 						trace[i] = trace[currentNode];
-						trace[i] += ", " + i;
+						trace[i] += " -> " + i;
 					}
 				}
 			}

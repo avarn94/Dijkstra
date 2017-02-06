@@ -1,0 +1,34 @@
+<!-- 
+
+JS returns the array of shortest lengths and paths form start node to others
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dijkstra Example</title>
+	<script src = "Dijkstra.js"></script>
+</head>
+<body>
+	<script>
+		var array = [
+			[Number.POSITIVE_INFINITY, 9, 4, 7, 12, 26, 34],
+			[2, Number.POSITIVE_INFINITY, 23, 22, 45, 2, 45],
+			[77, 23, Number.POSITIVE_INFINITY, 34, 34, 1, 22],
+			[11, 23, 61, Number.POSITIVE_INFINITY, 12, 38, 5],
+			[61, 11, 36, 82, Number.POSITIVE_INFINITY, 25, 62],
+			[44, 27, 77, 23, 22, Number.POSITIVE_INFINITY, 19],
+			[31, 6, 7, 78, 23, 55, Number.POSITIVE_INFINITY]
+		];
+		
+		console.log("Lengths from 0-node to others:");
+		var deikstra = new Dijkstra(array, 0, true).optimizedDistances;
+		console.log(deikstra);
+		console.log("Paths from 0-node to others:");
+		var deikstra = new Dijkstra(array, 0, true).trace;
+		console.log(deikstra);
+		
+	</script>
+</body>
+</html>
