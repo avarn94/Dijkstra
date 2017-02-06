@@ -1,4 +1,4 @@
-var Dijkstra = function(distances, firstVertex, showRoot) {
+var Dijkstra = function(distances, firstnode, showRoot) {
 	
 
 	/*---------------------------Constructor call validation----------------------------*/
@@ -11,15 +11,15 @@ var Dijkstra = function(distances, firstVertex, showRoot) {
 		console.log("The first parameter must be an Array!");
 		return -1;
 	}
-	if (isNaN(firstVertex)) {
-		console.log("Vertex number must be a number!");
+	if (isNaN(firstnode)) {
+		console.log("node's number must be a number!");
 		return -1;
 	}
 
 	var arrayLength = distances.length;
 
-	if (firstVertex < 0 || firstVertex >= arrayLength) {
-		console.log("The number of first vertex shouldn't exceed the number of all vertices!");
+	if (firstnode < 0 || firstnode >= arrayLength) {
+		console.log("The number of first node shouldn't exceed the number of all nodes!");
 		return -1;
 	}
 	for (var i = 0; i < arrayLength; i++)
@@ -33,18 +33,18 @@ var Dijkstra = function(distances, firstVertex, showRoot) {
 	/*----------------------------------------------------------------------------------*/
 
 
-	this.usedVertex = new Array(arrayLength); //Visited vertices
+	this.usedNode = new Array(arrayLength); //Visited nodes
 	var optimizedDistances = new Array(arrayLength); //The length of shortest path
 
 	
 	for (i = 0; i < arrayLength; i++)
 	{
 		optimizedDistances[i] = Number.POSITIVE_INFINITY;
-		this.usedVertex[i] = 0; //0 - not visited, 1 - visited vertex
+		this.usedNode[i] = 0; //0 - not visited, 1 - visited node
 	}
-	this.usedVertex[firstVertex] = 1;
-	optimizedDistances[firstVertex] = 0;
-	var currentVertex = firstVertex; //set the current vertex
+	this.usedNode[firstnode] = 1;
+	optimizedDistances[firstnode] = 0;
+	var currentNode = firstnode; //set the current node
 
 	var step = 0;
 
@@ -53,14 +53,14 @@ var Dijkstra = function(distances, firstVertex, showRoot) {
 		while (step < arrayLength) {
 			for (i = 0; i < arrayLength; i++)
 			{	
-				if (this.usedVertex[i] === 0) //dont touch visited vertices
+				if (this.usedNode[i] === 0) //dont touch visited nodes
 				{
-					optimizedDistances[i] = Math.min(optimizedDistances[i], (optimizedDistances[currentVertex] + distances[currentVertex][i]));
+					optimizedDistances[i] = Math.min(optimizedDistances[i], (optimizedDistances[currentNode] + distances[currentNode][i]));
 				}
 			}
 			
-			currentVertex = this.minElementIndex(optimizedDistances); //Set new current vertex	
-			this.usedVertex[currentVertex] = 1; //mark the vertex as visited
+			currentNode = this.minElementIndex(optimizedDistances); //Set new current node	
+			this.usedNode[currentNode] = 1; //mark the node as visited
 			step++;
 		}
 		return optimizedDistances;
@@ -69,22 +69,22 @@ var Dijkstra = function(distances, firstVertex, showRoot) {
 	else { //if we want to see the trace
 		
 		var trace = new Array(arrayLength); 
-		trace[currentVertex] = currentVertex;
+		trace[currentNode] = currentNode;
 
 		while (step < arrayLength) {
 			for (i = 0; i < arrayLength; i++)
 			{
-				if (this.usedVertex[i] === 0) //dont touch visited vertices
+				if (this.usedNode[i] === 0) //dont touch visited nodes
 				{
-					if (optimizedDistances[i] > optimizedDistances[currentVertex] + distances[currentVertex][i]) {
-						optimizedDistances[i] = optimizedDistances[currentVertex] + distances[currentVertex][i];
-						trace[i] = trace[currentVertex];
+					if (optimizedDistances[i] > optimizedDistances[currentNode] + distances[currentNode][i]) {
+						optimizedDistances[i] = optimizedDistances[currentNode] + distances[currentNode][i];
+						trace[i] = trace[currentNode];
 						trace[i] += ", " + i;
 					}
 				}
 			}
-			currentVertex = this.minElementIndex(optimizedDistances); 
-			this.usedVertex[currentVertex] = 1; 
+			currentNode = this.minElementIndex(optimizedDistances); 
+			this.usedNode[currentNode] = 1; 
 			step++;
 		}
 	    return {
@@ -100,7 +100,7 @@ Dijkstra.prototype.minElementIndex = function(array) {
 	var min = [Number.POSITIVE_INFINITY, ];
 	for (var i = 0, len = array.length; i < len; i++) {
 		//Проверяем только непройденные вершины
-		if (this.usedVertex[i] === 0)
+		if (this.usedNode[i] === 0)
 			if (array[i] < min[0])
 			{
 				min[0] = array[i];
